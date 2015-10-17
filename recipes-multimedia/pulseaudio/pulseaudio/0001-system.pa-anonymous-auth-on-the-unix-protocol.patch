@@ -1,0 +1,26 @@
+From 34cfe98d04eba46bef0b5af65b12333237109c08 Mon Sep 17 00:00:00 2001
+From: Tyler Hall <tyhall@lexmark.com>
+Date: Sat, 17 Oct 2015 16:25:29 -0400
+Subject: [PATCH] system.pa: anonymous auth on the unix protocol
+
+This avoids having to add every user to the audio group
+---
+ src/daemon/system.pa.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/daemon/system.pa.in b/src/daemon/system.pa.in
+index 9a31b74..1982415 100755
+--- a/src/daemon/system.pa.in
++++ b/src/daemon/system.pa.in
+@@ -39,7 +39,7 @@ load-module module-detect
+ .ifexists module-esound-protocol-unix@PA_SOEXT@
+ load-module module-esound-protocol-unix
+ .endif
+-load-module module-native-protocol-unix
++load-module module-native-protocol-unix auth-anonymous=1
+ 
+ ### Automatically restore the volume of streams and devices
+ load-module module-stream-restore
+-- 
+2.6.1
+
