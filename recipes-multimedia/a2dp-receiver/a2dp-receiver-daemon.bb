@@ -11,4 +11,11 @@ S = "${WORKDIR}/git"
 
 inherit setuptools
 
-RDEPENDS_${PN} = "packagegroup-pulseaudio-bluetooth"
+RDEPENDS_${PN} += "\
+	espeak \
+	packagegroup-pulseaudio-bluetooth \
+	python-dbus \
+	python-pygobject \
+	python-pyserial \
+	python-subprocess \
+"
