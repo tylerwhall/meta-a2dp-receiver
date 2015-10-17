@@ -9,25 +9,18 @@ Dependencies
 
 This layer depends on:
 
-  URI: git://git.openembedded.org/bitbake
-  branch: master
+  URI: https://github.com/tylerwhall/poky.git (contains backports of alsa-plugins)
+  layers: *
+  branch: fido
 
-  URI: git://git.openembedded.org/openembedded-core
-  layers: meta
-  branch: master
-
-  URI: git://git.yoctoproject.org/xxxx
-  layers: xxxx
-  branch: master
-
+  URI: git://git.openembedded.org/meta-openembedded
+  layers: meta-oe, meta-python
+  branch: fido
 
 Patches
 =======
 
-Please submit any patches against the a2dp-receiver layer to the
-xxxx mailing list (xxxx@zzzz.org) and cc: the maintainer:
-
-Maintainer: XXX YYYYYY <xxx.yyyyyy@zzzzz.com>
+Please submit a merge request on GitHub.
 
 
 Table of Contents
@@ -39,8 +32,6 @@ Table of Contents
 
 I. Adding the a2dp-receiver layer to your build
 =================================================
-
---- replace with specific instructions for the a2dp-receiver layer ---
 
 In order to use this layer, you need to make the build system aware of
 it.
@@ -55,10 +46,16 @@ other layers needed. e.g.:
     /path/to/yocto/meta-yocto \
     /path/to/yocto/meta-yocto-bsp \
     /path/to/yocto/meta-a2dp-receiver \
+    /path/to/yocto/meta-openembedded/meta-oe \
+    /path/to/yocto/meta-openembedded/meta-python \
     "
 
 
 II. Misc
 ========
 
---- replace with specific information about the a2dp-receiver layer ---
+Building core-image-base should generate an image that should boot up on
+qemux86. Bluetooth audio will work with QEMU's USB passthrough of a BT dongle
+and regular HD audio emulation. The requirements for other machines are ALSA
+drivers for your sound card and the btusb kernel module, if using a USB dongle.
+This has been tested on qemux86 and on a PandaBoard built from meta-ti.
