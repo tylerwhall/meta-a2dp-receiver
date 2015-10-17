@@ -1,0 +1,31 @@
+From 1907fba8911431fa382879d948158b80560bec53 Mon Sep 17 00:00:00 2001
+From: Tyler Hall <tyhall@lexmark.com>
+Date: Fri, 16 Oct 2015 23:54:14 -0400
+Subject: [PATCH] Start bluetooth on system server
+
+---
+ src/daemon/system.pa.in | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/src/daemon/system.pa.in b/src/daemon/system.pa.in
+index 01cea10..9a31b74 100755
+--- a/src/daemon/system.pa.in
++++ b/src/daemon/system.pa.in
+@@ -63,3 +63,14 @@ load-module module-suspend-on-idle
+ 
+ ### Enable positioned event sounds
+ load-module module-position-event-sounds
++
++ifelse(@HAVE_BLUEZ@, 1, [dnl
++### Automatically load driver modules for Bluetooth hardware
++.ifexists module-bluetooth-policy@PA_SOEXT@
++load-module module-bluetooth-policy
++.endif
++
++.ifexists module-bluetooth-discover@PA_SOEXT@
++load-module module-bluetooth-discover
++.endif
++])dnl
+-- 
+2.6.1
+

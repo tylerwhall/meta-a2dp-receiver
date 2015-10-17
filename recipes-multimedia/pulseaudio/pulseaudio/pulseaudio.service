@@ -1,0 +1,10 @@
+[Unit]
+Before=sound.target
+
+[Service]
+BusName=org.pulseaudio.Server
+ExecStart=/usr/bin/pulseaudio --system
+Restart=always
+
+[Install]
+WantedBy=sound.target
